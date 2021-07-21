@@ -13,6 +13,13 @@
     <properties>
         <java.version>11</java.version>
         <vaadin.version>14.6.6</vaadin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <drivers.dir>${project.basedir}/drivers</drivers.dir>
+        <drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
     </properties>
 
     <parent>
@@ -257,6 +264,14 @@
                         </executions>
                     </plugin>
 
+                   <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <jvmArguments>-Dvaadin.productionMode</jvmArguments>
+                        </configuration>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
@@ -269,22 +284,22 @@
                     </plugin>
 
                     <!-- Runs the integration tests (*IT) after the server is started -->
-                    <!--                    <plugin>
-                                            <groupId>org.apache.maven.plugins</groupId>
-                                            <artifactId>maven-failsafe-plugin</artifactId>
-                                            <executions>
-                                                <execution>
-                                                    <goals>
-                                                        <goal>integration-test</goal>
-                                                        <goal>verify</goal>
-                                                    </goals>
-                                                </execution>
-                                            </executions>
-                                            <configuration>
-                                                <trimStackTrace>false</trimStackTrace>
-                                                <enableAssertions>true</enableAssertions>
-                                            </configuration>
-                                        </plugin>-->
+                   <!-- <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <trimStackTrace>false</trimStackTrace>
+                            <enableAssertions>true</enableAssertions>
+                        </configuration>
+                    </plugin>-->
                 </plugins>
             </build>
         </profile>
